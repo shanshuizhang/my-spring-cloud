@@ -1,0 +1,13 @@
+server:
+  port: 1111
+eureka:
+  instance:
+    hostname: slave1
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+     defaultZone: http://slave2:1112/eureka

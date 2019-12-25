@@ -10,6 +10,7 @@
     <version>1.0.0</version>
     <modules>
         <module>eureka-client</module>
+        <module>eureka-security-server</module>
     </modules>
 
     <properties>

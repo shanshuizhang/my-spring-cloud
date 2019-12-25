@@ -1,0 +1,17 @@
+server:
+  port: 7777
+spring:
+  application:
+    name: eureka-security-client
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+     defaultZone: http://zss:123@localhost:8888/eureka
+
