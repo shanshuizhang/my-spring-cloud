@@ -1,0 +1,23 @@
+server:
+  port: 7766
+spring:
+  application:
+    name: user-service
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+     defaultZone: http://zss:123@localhost:8888/eureka/
+
+
+
+logging:
+ level:
+  org.springframework: debug
+  com.zss.user: debug
