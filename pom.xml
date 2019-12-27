@@ -16,6 +16,9 @@
         <module>ribbon-service</module>
         <module>common-spring-boot-starter</module>
         <module>hystrix-service</module>
+        <module>hystrix-dashboard</module>
+        <module>turbine-service</module>
+        <module>feign-service</module>
     </modules>
 
     <properties>

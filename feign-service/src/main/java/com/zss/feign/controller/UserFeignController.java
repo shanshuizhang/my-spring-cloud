@@ -1,8 +1,8 @@
-package com.zss.user.controller;
+package com.zss.feign.controller;
 
+import com.zss.feign.service.UserService;
 import com.zss.springcloud.common.dto.RestResultDto;
-import com.zss.user.dto.UserDto;
-import com.zss.user.service.UserService;
+import com.zss.springcloud.common.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * @author fuguozhang
  * @email fuguozhang@jyblife.com
- * @date 2019/12/26 14:22
+ * @date 2019/12/27 19:42
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user-feign")
 @Slf4j
-public class UserController {
+public class UserFeignController {
 
     @Autowired
     private UserService userService;
@@ -30,22 +30,17 @@ public class UserController {
 
     @GetMapping("/{id}")
     public RestResultDto getUser(@PathVariable Long id){
-        UserDto user = userService.getUser(id);
-        log.info("根据用户id：[{}]获取用户信息，用户名称：[{}]",id,user.getUsername());
-        return RestResultDto.success(user);
+        return userService.getUser(id);
     }
 
     @GetMapping("/getByIds")
     public RestResultDto getByIds(@RequestParam List<Long> ids){
-        List<UserDto> userDtos = userService.getByIds(ids);
-        return RestResultDto.success(userDtos);
+        return userService.getByIds(ids);
     }
 
     @GetMapping("/getByUsername")
     public RestResultDto getByUsername(@RequestParam String username){
-        log.info("根据用户名获取用户，用户名：[{}]",username);
-        UserDto user = userService.getByUsername(username);
-        return RestResultDto.success(user);
+        return userService.getByUsername(username);
     }
 
     @PostMapping("/update")
@@ -59,5 +54,4 @@ public class UserController {
         userService.delete(id);
         return RestResultDto.success();
     }
-
 }

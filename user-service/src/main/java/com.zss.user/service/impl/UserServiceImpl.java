@@ -4,6 +4,7 @@ import com.zss.user.dto.UserDto;
 import com.zss.user.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,13 +25,17 @@ public class UserServiceImpl implements UserService {
                 .username("张山")
                 .password("123")
                 .age(11)
-                .gender(1)
+                .gender(id.intValue())
                 .build();
     }
 
     @Override
     public List<UserDto> getByIds(List<Long> ids) {
-        return null;
+        List<UserDto> users = new ArrayList<>();
+        ids.forEach(id ->{
+            users.add(getUser(id));
+        });
+        return users;
     }
 
     @Override
