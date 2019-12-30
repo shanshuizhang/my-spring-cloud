@@ -1,0 +1,25 @@
+server:
+  port: 9995
+
+logging:
+ level:
+  org.springframework.cloud.gateway: debug
+  com.zss.gateway: debug
+spring:
+  redis:
+    host: 172.16.1.16
+    port: 6379
+    database: 10
+  cloud:
+    gateway:
+      routes:
+       - id: request_ratelimiter_route
+         uri: ${user-service.service-url}
+         filters:
+          - name: RequestRateLimiter
+            args:
+             redis-rate-limiter.replenishRate: 1 #每秒允许处理的请求数量
+             redis-rate-limiter.burstCapacity: 2 #每秒最大处理的请求数量
+             key-resolver: "#{@ipKeyResolver}" #限流策略，对应策略的Bean
+         predicates:
+          - Method=GET

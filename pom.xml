@@ -21,6 +21,7 @@
         <module>feign-service</module>
         <module>zuul-proxy</module>
         <module>api-limit-spring-boot-starter</module>
+        <module>api-gateway</module>
     </modules>
 
     <properties>

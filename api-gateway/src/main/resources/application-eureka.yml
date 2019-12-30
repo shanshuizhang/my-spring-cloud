@@ -1,0 +1,32 @@
+server:
+  port: 9993
+
+logging:
+ level:
+  org.springframework.cloud.gateway: debug
+  com.zss.gateway: debug
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+     defaultZone: http://zss:123@localhost:8888/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+      routes:
+       - id: prefixpath_route
+         uri: lb://user-service
+         predicates:
+          - Method=GET
+         filters:
+          - PrefixPath=/user

@@ -1,0 +1,90 @@
+server:
+  port: 9997
+
+
+user-service:
+ service-url: http://localhost:7766
+
+logging:
+ level:
+  org.springframework: debug
+  com.zss.gateway: debug
+spring:
+  cloud:
+    gateway:
+      routes:
+       - id: after_route
+         uri: ${user-service.service-url}
+         predicates:
+          - After=2019-12-30T16:30:00+08:00[Asia/Shanghai]
+
+       - id: before_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Before=2019-12-30T11:30:00+08:00[Asia/Shanghai]
+
+       - id: between_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
+
+       - id: cookie_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Cookie=username,zssa
+
+       - id: header_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Header=X-Request-Id,\d+
+
+       - id: host_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Host=**.com.zss
+
+       - id: method_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Method=POST
+
+       - id: query_route
+         uri: ${user-service.service-url}/user/getByUsername
+         predicates:
+          - Query=username
+
+       - id: remoteaddr_route
+         uri: ${user-service.service-url}
+         predicates:
+          - RemoteAddr=172.16.2.126
+
+#       - id: weight_high
+#         uri: ${user-service.service-url}
+#         predicates:
+#          - Weight=group1,8
+#       - id: weight_low
+#         uri: ${user-service.service-url}
+#         predicates:
+#          - Weight=group1,2
+
+#       - id: add_request_parameter_route
+#         uri: ${user-service.service-url}
+#         filters:
+#          - AddRequestParameter=username,zssh
+#         predicates:
+#          - Method=GET
+
+       - id: strip_prefix_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Path=/user-service/**
+         filters:
+          - StripPrefix=2
+
+       - id: prefix_path_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Method=GET
+         filters:
+          - PrefixPath=/user
+

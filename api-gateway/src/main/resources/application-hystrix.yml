@@ -1,0 +1,22 @@
+server:
+  port: 9996
+
+
+logging:
+ level:
+  org.springframework: debug
+  com.zss.gateway: debug
+spring:
+  cloud:
+    gateway:
+      routes:
+       - id: hystrix_route
+         uri: ${user-service.service-url}
+         predicates:
+          - Method=GET
+         filters:
+          - name: Hystrix
+            args:
+             name: fallbackcmd
+             fallbackUri: forward:/fallback
+

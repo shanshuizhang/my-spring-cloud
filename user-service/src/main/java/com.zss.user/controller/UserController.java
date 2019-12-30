@@ -30,6 +30,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public RestResultDto getUser(@PathVariable Long id){
+        //int i = 1/0;
         UserDto user = userService.getUser(id);
         log.info("根据用户id：[{}]获取用户信息，用户名称：[{}]",id,user.getUsername());
         return RestResultDto.success(user);
