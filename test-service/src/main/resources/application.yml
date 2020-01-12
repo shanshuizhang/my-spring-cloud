@@ -1,0 +1,23 @@
+server:
+  port: 4567
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+     defaultZone: http://172.16.1.65:8761/eureka/
+logging:
+  level:
+   com.zss.test: debug
+   #org.springframework: debug
+feign:
+  client:
+    config:
+     default:
+      connectTimeout: 9000
+      readTimeout: 9000

@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: zss-test-service
