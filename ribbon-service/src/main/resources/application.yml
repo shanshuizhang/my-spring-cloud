@@ -12,7 +12,6 @@ eureka:
     service-url:
      defaultZone: http://zss:123@localhost:8888/eureka/
 
-
 service-url:
  user-service: http://user-service
 
@@ -43,8 +42,21 @@ logging:
    org.springframework: debug
    com.zss.ribbon: debug
    com.netflix.ribbon: debug
+spring:
+  zipkin:
+    base-url: http://172.16.1.66:9411
+  sleuth:
+    sampler:
+      probability: 0.9
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
 
 #com.netflix.loadbalancer.RandomRule：从提供服务的实例中以随机的方式；
 #com.netflix.loadbalancer.RoundRobinRule：以线性轮询的方式，就是维护一个计数器，从提供服务的实例中按顺序选取，第一次选第一个，第二次选第二个，以此类推，到最后一个以后再从头来过；

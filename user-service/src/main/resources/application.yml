@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: user-service
+  zipkin:
+    base-url: http://172.16.1.66:9411
+  sleuth:
+    sampler:
+      probability: 0.9
 eureka:
   instance:
     hostname: localhost
@@ -16,8 +21,17 @@ eureka:
      defaultZone: http://zss:123@localhost:8888/eureka/
 
 
-
 logging:
  level:
   org.springframework: debug
-  com.zss.user: debug
+  com.zss.user:
+ file: user-service.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

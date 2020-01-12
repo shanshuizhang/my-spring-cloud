@@ -26,7 +26,7 @@ public class UserRibbonController {
 
     @GetMapping("/{id}")
     public RestResultDto getUser(@PathVariable Long id){
-        return restTemplate.getForObject(userServiceURL + "/user/{}",RestResultDto.class,id);
+        return restTemplate.getForObject(userServiceURL + "/user/{a}",RestResultDto.class,id);
     }
 
     @GetMapping("/getByUsername")
