@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 
 import com.zss.oauth2.service.UserService;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -70,8 +71,15 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
                 .secret(passwordEncoder.encode("admin123456"))//配置client-secret
                 .accessTokenValiditySeconds(3600)//配置访问token的有效期
                 .refreshTokenValiditySeconds(864000)//配置刷新token的有效期
-                .redirectUris("http://www.baidu.com")//配置redirect_uri，用于授权成功后跳转
+//                .redirectUris("http://www.baidu.com")//配置redirect_uri，用于授权成功后跳转
+                .redirectUris("http://localhost:1235/login")
+                .autoApprove(true)//自动授权，跳过授权页面
                 .scopes("all")//配置申请的权限范围
                 .authorizedGrantTypes("authorization_code","password","refresh_token");//配置grant_type，表示授权类型
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("isAuthenticated()");
     }
 }

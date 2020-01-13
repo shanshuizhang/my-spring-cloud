@@ -25,6 +25,7 @@
         <module>test-service</module>
         <module>admin-server</module>
         <module>oauth2-server</module>
+        <module>oauth2-client</module>
     </modules>
 
     <properties>
