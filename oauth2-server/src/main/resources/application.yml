@@ -1,0 +1,12 @@
+server:
+  port: 1234
+logging:
+  level:
+   org.springframework: debug
+   com.zss.oauth2: debug
+spring:
+  redis:
+    database: 10
+    host: 172.16.1.16
+    port: 6379
+
