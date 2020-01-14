@@ -1,0 +1,11 @@
+server:
+  port: 2587
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+logging:
+  level:
+   com.alibaba.nacos: debug
+
