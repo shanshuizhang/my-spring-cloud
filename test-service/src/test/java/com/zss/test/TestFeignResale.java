@@ -62,7 +62,7 @@ public class TestFeignResale {
 
     @Test
     public void testMultipleThreads() throws InterruptedException{
-        for(int i = 250; i <251;i++){
+        for(int i = 251; i <252;i++){
             int resaleOrderId = i;
             new Thread(()->{
                 //testResaleRevoke();

@@ -4,8 +4,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 172.16.1.66:8848
 logging:
   level:
-   com.alibaba.nacos: debug
-
+   com.alibaba: debug
+   com.zss.nacos: debug
+   org.springframework: debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

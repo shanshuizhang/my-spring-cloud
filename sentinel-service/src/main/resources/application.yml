@@ -1,0 +1,39 @@
+server:
+  port: 2588
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.1.66:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8720
+      datasource:
+       ds1:
+        nacos:
+         server-addr: 172.16.1.66:8848
+         dataId: ${spring.application.name}-sentinel
+         groupId: DEFAULT_GROUP
+         data-type: json
+         rule-type: flow
+
+service-url:
+ user-service: http://nacos-user-service
+
+
+logging:
+  level:
+   com.alibaba: debug
+   org.springframework: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+feign:
+  sentinel:
+    enabled: true
+
