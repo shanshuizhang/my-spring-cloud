@@ -1,7 +1,6 @@
-package com.zss.feign.service;
+package com.zss.sentinel.service;
 
-import com.zss.feign.config.FeignConfig;
-import com.zss.feign.service.impl.UserFallbackService;
+import com.zss.sentinel.service.impl.UserFallbackService;
 import com.zss.springcloud.common.dto.RestResultDto;
 import com.zss.springcloud.common.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,7 +13,7 @@ import java.util.List;
  * @email fuguozhang@jyblife.com
  * @date 2019/12/27 19:31
  */
-@FeignClient(name = "user-service",configuration = FeignConfig.class,fallback = UserFallbackService.class)
+@FeignClient(name = "user-service",fallback = UserFallbackService.class)
 public interface UserService {
 
     @PostMapping("/user/create")

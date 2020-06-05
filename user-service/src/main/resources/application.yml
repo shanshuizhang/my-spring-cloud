@@ -3,11 +3,11 @@ server:
 spring:
   application:
     name: user-service
-  zipkin:
-    base-url: http://172.16.1.66:9411
-  sleuth:
-    sampler:
-      probability: 0.9
+#  zipkin:
+#    base-url: http://172.16.1.66:9411
+#  sleuth:
+#    sampler:
+#      probability: 0.9
 eureka:
   instance:
     hostname: localhost

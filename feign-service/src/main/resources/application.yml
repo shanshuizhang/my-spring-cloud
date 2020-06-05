@@ -20,6 +20,15 @@ logging:
 feign:
   hystrix:
     enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 3000
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
 
 #feign自己的配置
 #feign:

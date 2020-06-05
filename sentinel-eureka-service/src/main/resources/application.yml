@@ -1,0 +1,45 @@
+server:
+  port: 2599
+
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8720
+
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://zss:123@localhost:8888/eureka/
+
+service-url:
+ user-service: http://user-service
+
+logging:
+  level:
+   com.alibaba: debug
+   org.springframework: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+feign:
+  sentinel:
+    enabled: true
+

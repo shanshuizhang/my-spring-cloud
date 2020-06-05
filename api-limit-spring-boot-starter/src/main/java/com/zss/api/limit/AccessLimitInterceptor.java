@@ -1,6 +1,6 @@
 package com.zss.api.limit;
 
-import com.zss.api.limit.annotation.AccessLimit;
+import com.zss.api.limit.annotation.Limit;
 import com.zss.api.limit.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class AccessLimitInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(handler instanceof HandlerMethod){
             HandlerMethod hm = (HandlerMethod)handler;
-            AccessLimit accessLimit = hm.getMethodAnnotation(AccessLimit.class);
+            Limit accessLimit = hm.getMethodAnnotation(Limit.class);
             if(accessLimit == null){
                 return true;
             }

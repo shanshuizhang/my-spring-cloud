@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: sentinel-eureka-service
+
+# apollo 相关配置
+app:
+  id: ${spring.application.name}  # apollo项目ID
+apollo:
+  meta: http://172.16.1.68:8080
+  cacheDir: ../app_data/apollo_cache
+  bootstrap:
+    enabled: true
+    namespaces: application
+    eagerLoad:
+      enabled: true

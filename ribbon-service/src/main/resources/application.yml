@@ -34,7 +34,7 @@ user-service:
     OkToRetryOnAllOperations: true #对超时请求启用重试机制
     MaxAutoRetriesNextServer: 1 #切换重试实例的最大个数
     MaxAutoRetries: 1 # 切换实例后重试最大次数
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #修改负载均衡算法
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #修改负载均衡算法
 
 
 logging:
@@ -42,12 +42,12 @@ logging:
    org.springframework: debug
    com.zss.ribbon: debug
    com.netflix.ribbon: debug
-spring:
-  zipkin:
-    base-url: http://172.16.1.66:9411
-  sleuth:
-    sampler:
-      probability: 0.9
+#spring:
+#  zipkin:
+#    base-url: http://172.16.1.66:9411
+#  sleuth:
+#    sampler:
+#      probability: 0.9
 
 management:
   endpoints:
